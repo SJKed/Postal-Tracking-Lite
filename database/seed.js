@@ -14,7 +14,7 @@ User.bulkCreate([
     },
     {
         email: 'simonjkreplays@gmail.com',
-        password: 'supersafepassword',
+        password: '$2a$10$VobHgIhMmOyTN1XwJmYe9.AiP7Eral.hto8onsrd4T7TOO/ukd.ay',
         firstName: 'Simon',
         lastName: 'Jurstedt',
         phone: '123456789',

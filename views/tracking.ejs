@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Postal Tracking Lite</h1>
+    </div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/tracking">Tracking</a>
+        <% if(!user) { %>
+            <a href="/login">Login</a>
+        <% } %>
+        <% if(user) { %>
+            <a href="/logout">Logout</a>
+        <% } %>
+    </nav>
+    <div class="wrapper">
+        <div class="user-orders-container">
+            <h1>Here are your current packages in transit</h1>
+            <% for (order of userOrders) { %>
+                <p>
+                    <%=order.orderName %>
+                </p>
+                <p>
+                    <%=order.orderStatus %>
+                </p>
+                <p>
+                    <%=order.trackingCode %>
+                </p>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

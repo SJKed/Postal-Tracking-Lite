@@ -21,10 +21,11 @@ app.use(session({
 
 app.get('/', (req, res) => {
     if (req.session.user) {
-        res.render('index', {user: req.session.user})
+        res.render('index', { user: req.session.user })
     } else {
-        res.render('index', {user: null})};
-    }
+        res.render('index', { user: null })
+    };
+}
 );
 app.get('/login', (req, res) => {
     res.render('login');
@@ -32,10 +33,17 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
     res.render('register');
 });
-app.get('/tracking', (req, res) => {
-    res.render('tracking')
-})
+app.get('/tracking', async (req, res) => {
+    if (req.session.user) {
+        const userOrders = await Order.findAll({ where: { userId: req.session.user.userId } });
+        console.log(userOrders);
+        res.render('tracking', { userOrders, user: req.session.user });
+    } else {
+        res.render('login');
+    }
+});
 app.get('/logout', (req, res) => {
+    console.log('logging out');
     req.session.destroy();
     res.redirect('/');
 });
