@@ -13,12 +13,20 @@ module.exports = database => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        orderDate: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
         orderStatus: {
             type: DataTypes.STRING,
+            allowNull: false
+        },
+        orderName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        trackingCode: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        orderDate: {
+            type: DataTypes.DATE,
             allowNull: false
         },
         updatedAt: {

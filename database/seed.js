@@ -2,9 +2,8 @@ const {User, Order} = require('../models');
 
 User.bulkCreate([
     {
-        username: 'admin',
-        password: 'admin',
         email: 'admin@email.com',
+        password: 'admin',
         firstName: 'Admin',
         lastName: 'Admin',
         phone: '123456789',
@@ -14,9 +13,8 @@ User.bulkCreate([
         zip: '12345'
     },
     {
-        username: 'SJK',
-        password: 'supersafepassword',
         email: 'simonjkreplays@gmail.com',
+        password: 'supersafepassword',
         firstName: 'Simon',
         lastName: 'Jurstedt',
         phone: '123456789',
@@ -30,5 +28,7 @@ User.bulkCreate([
 Order.create({
     userId: 2,
     orderDate: new Date(),
-    orderStatus: 'Pending'
+    orderStatus: 'On the way',
+    orderName: 'CARDMARKET GHB',
+    trackingCode: '2415321SE',
 });
