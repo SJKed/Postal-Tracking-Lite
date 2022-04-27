@@ -53,7 +53,7 @@ app.post('/register', async (req, res) => {
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({ email, password: hash });
     req.session.user = user;
-    res.redirect('/');
+    res.redirect('/index');
 });
 
 

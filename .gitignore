@@ -1,2 +1,3 @@
 node_modules
+database/postal.sqlite
 .env

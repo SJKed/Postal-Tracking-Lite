@@ -31,4 +31,11 @@ Order.create({
     orderStatus: 'On the way',
     orderName: 'CARDMARKET GHB',
     trackingCode: '2415321SE',
+    firstName: 'Simon',
+    lastName: 'Jurstedt',
+    phone: '123456789',
+    address: '123 Simon Street',
+    city: 'Simon City',
+    country: 'Simon Country',
+    zip: '12345'
 });
