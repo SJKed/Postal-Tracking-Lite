@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.18.0",
+    "sequelize": "^6.19.0"
+  },
+  "name": "postal-tracking-lite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SJKed/Postal-Tracking-Lite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SJKed/Postal-Tracking-Lite/issues"
+  },
+  "homepage": "https://github.com/SJKed/Postal-Tracking-Lite#readme",
+  "description": ""
+}
