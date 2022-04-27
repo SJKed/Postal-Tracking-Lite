@@ -14,12 +14,18 @@ app.set('view engine', 'ejs');
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true
+    name: 'uniqueSessionID',
+    resave: false,
+    saveUninitialized: true,
 }));
 
 app.get('/', (req, res) => {
-    res.render('index');
+    if (req.session.loggedIn) {
+        const user = req.session.user
+        res.render('index', {user})
+    } else {
+        res.render('login');
+    }
 });
 app.get('/login', (req, res) => {
     res.render('login');
@@ -27,37 +33,42 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
     res.render('register');
 });
+app.get('/tracking', (req, res) => {
+    res.render('tracking')
+})
 
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
     if (!user) {
-        res.render('login', { error: 'User not found' });
+        res.redirect('/login', { error: 'User not found' });
     } else {
-        const isValid = await bcrypt.compare(password, user.password);
-        if (!isValid) {
-            res.render('login', { error: 'Invalid password' });
-        } else {
+        if(password == user.password) {
+            console.log('success')
             req.session.user = user;
-            res.redirect('/tracking');
+            req.session.loggedIn = true;
+            res.redirect('/');
         }
     }
 });
 
 app.post('/register', async (req, res) => {
-    const { email, password, passwordConfirmation } = req.body;
-    if (password !== passwordConfirmation) {
-        res.render('register', { error: 'Passwords do not match' });
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ where: { email } });
+        if (user) {
+            res.render('register', { error: 'User already exists' });
+        } else {
+            const hash = await bcrypt.hash(password, 10);
+            const newUser = await User.create({ email, password: hash });
+            req.session.user = newUser;
+            res.redirect('/');
+        }
+    } catch (err) {
+        console.log(err);
     }
-    const hash = await bcrypt.hash(password, 10);
-    const user = await User.create({ email, password: hash });
-    req.session.user = user;
-    res.redirect('/index');
 });
-
-
-
 
 
 app.listen(8080, () => {

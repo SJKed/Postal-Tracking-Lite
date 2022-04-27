@@ -81,10 +81,11 @@ nav > a:hover {
     margin-bottom: 10px;
 }
 
-.login-wrapper > form > button {
+#submit-button {
     width: 210px;
     height: 40px;
-    margin-top: 20px;
+    margin-top: 10px;
+    padding: 5px;
     border: 1px solid #01a0d7;
     border-radius: 5px;
     background-color: #01a0d7;

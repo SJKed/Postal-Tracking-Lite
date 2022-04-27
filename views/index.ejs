@@ -19,7 +19,12 @@
         <a href="/login">Login</a>
     </nav>
     <div class="wrapper">
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum, amet?</p>
+        <p>
+            <% if(user) { %>
+                Welcome to the landing page <%=user.email%>
+            <% } %>
+        </p>
+        <p>Hello</p>
     </div>
 </body>
 
