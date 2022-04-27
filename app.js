@@ -20,13 +20,12 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-    if (req.session.loggedIn) {
-        const user = req.session.user
-        res.render('index', {user})
+    if (req.session.user) {
+        res.render('index', {user: req.session.user})
     } else {
-        res.render('login');
+        res.render('index', {user: null})};
     }
-});
+);
 app.get('/login', (req, res) => {
     res.render('login');
 });
@@ -36,6 +35,10 @@ app.get('/register', (req, res) => {
 app.get('/tracking', (req, res) => {
     res.render('tracking')
 })
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
 
 
 app.post('/login', async (req, res) => {
@@ -44,15 +47,16 @@ app.post('/login', async (req, res) => {
     if (!user) {
         res.redirect('/login', { error: 'User not found' });
     } else {
-        if(password == user.password) {
-            console.log('success')
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (isMatch) {
+            console.log('login successful');
             req.session.user = user;
-            req.session.loggedIn = true;
             res.redirect('/');
+        } else {
+            res.redirect('/login', { error: 'Incorrect password' });
         }
     }
 });
-
 app.post('/register', async (req, res) => {
     try {
         const { email, password } = req.body;

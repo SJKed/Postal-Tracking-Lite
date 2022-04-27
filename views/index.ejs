@@ -16,7 +16,12 @@
     <nav>
         <a href="/">Home</a>
         <a href="/tracking">Tracking</a>
-        <a href="/login">Login</a>
+        <% if(!user) { %>
+            <a href="/login">Login</a>
+        <% } %>
+        <% if(user) { %>
+            <a href="/logout">Logout</a>
+        <% } %>
     </nav>
     <div class="wrapper">
         <p>
