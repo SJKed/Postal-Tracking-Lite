@@ -1,5 +1,4 @@
 const { DataTypes, Model } = require('sequelize');
-const { FOREIGNKEYS } = require('sequelize/types/query-types');
 
 module.exports = database => {
     class Orders extends Model { }
